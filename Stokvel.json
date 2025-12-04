@@ -1,0 +1,1229 @@
+{
+  "abi":[
+	{
+		"inputs": [],
+		"name": "activateMembership",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "idString",
+				"type": "string"
+			}
+		],
+		"stateMutability": "payable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "AlreadyBlacklisted",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "AlreadyVoted",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "CannotCloseAccount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "DuplicateId",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InsufficientActivationFee",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InsufficientAvailableSavings",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InsufficientCollateral",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InsufficientJoiningFee",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidApplicant",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidPaymentAmount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "LoanAlreadyActive",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "LoanAlreadyDefaulted",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "LoanNotFound",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "LoanNotFullyFunded",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NoDefaultDetected",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NotActiveMember",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NotApproved",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "member",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "AccountClosed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			}
+		],
+		"name": "ApplicantApproved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			}
+		],
+		"name": "ApplicantRejected",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "hashedId",
+				"type": "bytes32"
+			}
+		],
+		"name": "ApplicationSubmitted",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "idString",
+				"type": "string"
+			}
+		],
+		"name": "applyToJoin",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			}
+		],
+		"name": "checkLoanDefault",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "closeAccount",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "hashedId",
+				"type": "bytes32"
+			}
+		],
+		"name": "ClubCreated",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "member",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Deposit",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "fundLoan",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "borrower",
+				"type": "address"
+			}
+		],
+		"name": "LoanDefaulted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "borrower",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "LoanDisbursed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "lender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "LoanFunded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "borrower",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountRequested",
+				"type": "uint256"
+			}
+		],
+		"name": "LoanRequested",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			}
+		],
+		"name": "makeMonthlyPayment",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "member",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "hashedId",
+				"type": "bytes32"
+			}
+		],
+		"name": "MemberActivated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "borrower",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "hashedId",
+				"type": "bytes32"
+			}
+		],
+		"name": "MemberBlacklisted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "installmentIndex",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "PaymentMade",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amountRequested",
+				"type": "uint256"
+			}
+		],
+		"name": "requestLoan",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "voter",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isPositive",
+				"type": "bool"
+			}
+		],
+		"name": "VoteCast",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isPositive",
+				"type": "bool"
+			}
+		],
+		"name": "voteOnApplicant",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "member",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Withdrawal",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "applicantHashedIds",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "applicantNegativeVotes",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "applicantPositiveVotes",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "COLLATERAL_PERCENT",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "creator",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "creatorHasVoted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "creatorVoteOnApplicant",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			}
+		],
+		"name": "getApplicantVotingStatus",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "positiveVotes",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "negativeVotes",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "creatorVoted",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "creatorVotePositive",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalOtherMembers",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "requiredVotes",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "decisionMade",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "approved",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "memberAddress",
+				"type": "address"
+			}
+		],
+		"name": "getAvailableSavings",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "getInstallment",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "dueDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountDue",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lateFeesAccrued",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isPaid",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "lender",
+				"type": "address"
+			}
+		],
+		"name": "getLenderAmount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			}
+		],
+		"name": "getLenderList",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			}
+		],
+		"name": "getLoan",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "borrower",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountRequested",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountFunded",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "collateralLocked",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalInterest",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isDefaulted",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nextInstallmentIndex",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "createdAt",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "memberAddress",
+				"type": "address"
+			}
+		],
+		"name": "getMember",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "hashedId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSavings",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountLentOut",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountLockedCollateral",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "availableSavings",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getTotalLoans",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"name": "hashedIdToAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "memberAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "applicantAddress",
+				"type": "address"
+			}
+		],
+		"name": "hasMemberVoted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			}
+		],
+		"name": "hasVotingDecision",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "INSTALLMENT_PERIOD",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "INTEREST_RATE_APR",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "applicant",
+				"type": "address"
+			}
+		],
+		"name": "isApplicantApproved",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"name": "isBlacklisted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "JOINING_FEE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "LATE_FEE_PERCENT",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "LENDING_LIMIT_PERCENT",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "LOAN_TERM_MONTHS",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "loans",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "borrower",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountRequested",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountFunded",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "collateralLocked",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalInterest",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isDefaulted",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nextInstallmentIndex",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "createdAt",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "members",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "hashedId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSavings",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountLentOut",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountLockedCollateral",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "nextLoanId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalMembers",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]}
